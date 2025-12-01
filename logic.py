@@ -5,12 +5,19 @@ import csv
 
 class Logic(QMainWindow, Ui_MainWindow):
     def __init__(self):
+        """
+        Method to initialize the main window
+        """
         super().__init__()
         self.setupUi(self)
 
         self.button_submit.clicked.connect(lambda : self.submit())
 
     def submit(self):
+        """
+        Method to submit vote
+        :return: vote and vote_id
+        """
         vote_id = int(self.input_id.text())
         try:
             if len(vote_id) < 4:
