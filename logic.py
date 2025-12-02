@@ -4,7 +4,7 @@ import csv
 
 
 class Logic(QMainWindow, Ui_MainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Method to initialize the main window
         """
@@ -20,7 +20,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         vote_id = int(self.input_id.text())
         try:
-            if len(vote_id) < 4:
+            if len(vote_id) != 4:
                 raise ValueError
         except ValueError:
             self.label_name.setText(text="Invalid ID")
