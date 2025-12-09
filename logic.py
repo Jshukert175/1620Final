@@ -54,17 +54,18 @@ class Logic(QMainWindow, Ui_MainWindow):
         with open('data.csv', 'a', newline='') as csvfile:
             content = csv.writer(csvfile)
             content.writerow([vote_id, vote])
+
         with open('data.csv', 'r', newline='') as csvread:
             reader = csv.reader(csvread)
             voters = []
             for row in reader:
-                voters.append(row)
-                for v in voters:
-                    print(v)
-                self.label_name.setText("Already Voted")
-                self.label_name.setStyleSheet("color: red")
-
-        self.input_id.clear()
-        self.label_name.setText("Submitted")
-        self.label_name.setStyleSheet("color: green")
-        self.input_id.setFocus()
+                voters.append(row[0])
+            for v in voters:
+                if voters.count(v) > 1:
+                    self.label_name.setText("Already Voted")
+                    self.label_name.setStyleSheet("color: red")
+                else:
+                    self.input_id.clear()
+                    self.label_name.setText("Submitted")
+                    self.label_name.setStyleSheet("color: green")
+                    self.input_id.setFocus()
