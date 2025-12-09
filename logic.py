@@ -18,27 +18,53 @@ class Logic(QMainWindow, Ui_MainWindow):
         Method to submit vote
         :return: vote and vote_id
         """
-        vote_id = int(self.input_id.text())
+        vote_id = self.input_id.text()
         try:
+
             if len(vote_id) != 4:
                 raise ValueError
+            if vote_id.isdigit() == False:
+                raise TypeError
         except ValueError:
-            self.label_name.setText(text="Invalid ID")
+            self.label_name.setText("Invalid ID")
+            self.label_name.setStyleSheet("color: red")
             return
+        except TypeError:
+            self.label_name.setText("Insert a number")
+            self.label_name.setStyleSheet("color: red")
+            return
+
+        vote = None
         if self.jane.isChecked():
             vote = "Jane"
         elif self.john.isChecked():
             vote = "John"
         else:
-            vote = "Vote for a candidate"
+            self.label_name.setText("Vote for a candidate")
+            self.label_name.setStyleSheet("color: red")
+            return
 
-        if self.votes.checkedButton() is not None:
+        radio = self.votes.checkedButton()
+        if radio:
             self.votes.setExclusive(False)
-            self.votes.checkedButton().setChecked(False)
+            radio.setChecked(False)
             self.votes.setExclusive(True)
+
 
         with open('data.csv', 'a', newline='') as csvfile:
             content = csv.writer(csvfile)
             content.writerow([vote_id, vote])
+        with open('data.csv', 'r', newline='') as csvread:
+            reader = csv.reader(csvread)
+            voters = []
+            for row in reader:
+                voters.append(row)
+                for v in voters:
+                    print(v)
+                self.label_name.setText("Already Voted")
+                self.label_name.setStyleSheet("color: red")
 
-        self.vote_id.clear()
+        self.input_id.clear()
+        self.label_name.setText("Submitted")
+        self.label_name.setStyleSheet("color: green")
+        self.input_id.setFocus()
