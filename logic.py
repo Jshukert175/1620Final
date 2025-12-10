@@ -20,7 +20,6 @@ class Logic(QMainWindow, Ui_MainWindow):
         """
         vote_id = self.input_id.text()
         try:
-
             if len(vote_id) != 4:
                 raise ValueError
             if vote_id.isdigit() == False:
