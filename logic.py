@@ -34,10 +34,10 @@ class Logic(QMainWindow, Ui_MainWindow):
             return
 
         vote = None
-        if self.jane.isChecked():
-            vote = "Jane"
-        elif self.john.isChecked():
-            vote = "John"
+        if self.peach.isChecked():
+            vote = "Peach"
+        elif self.bowser.isChecked():
+            vote = "Bowser"
         else:
             self.label_name.setText("Vote for a candidate")
             self.label_name.setStyleSheet("color: red")
