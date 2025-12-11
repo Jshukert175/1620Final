@@ -1,6 +1,6 @@
 from logic import *
 
-def main():
+def main() -> None:
     """
     Main function
     """

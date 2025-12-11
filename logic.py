@@ -13,10 +13,9 @@ class Logic(QMainWindow, Ui_MainWindow):
 
         self.button_submit.clicked.connect(lambda : self.submit())
 
-    def submit(self):
+    def submit(self) -> None:
         """
         Method to submit vote
-        :return: vote and vote_id
         """
         vote_id = self.input_id.text()
         try:
